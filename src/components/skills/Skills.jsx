@@ -4,14 +4,14 @@ const Skills = () => {
     return (
         <section id="skills" className="py-20 px-4 bg-white">
             <article className="max-w-4xl mx-auto text-center">
-                <header className="mb-12">
+                <section className="mb-12">
                     <h2 className="text-4xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2">
                         Habilidades
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mt-6">
                         Tecnologías y herramientas que utilizo para crear experiencias web accesibles, funcionales y estéticamente cuidadas.
                     </p>
-                </header>
+                </section>
 
                 <ul className="flex flex-wrap justify-center gap-4">
                     {skillsData.map((skill) => (
