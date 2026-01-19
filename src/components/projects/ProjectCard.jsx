@@ -2,7 +2,7 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => (
     <article className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
 
         <section className="mb-4">
-            <h3 className="text-xl font-bold text-purple-600 hover:text-purple-700 transition-colors text-center">
+            <h3 className="text-xl font-bold text-black hover:text-purple-700 transition-colors text-center">
                 {title}
             </h3>
         </section>

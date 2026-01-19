@@ -1,11 +1,12 @@
 import { skillsData } from './skillsData';
+import SkillCategory from './SkillCategory';
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-20 px-4 bg-white">
-            <article className="max-w-4xl mx-auto text-center">
-                <section className="mb-12">
-                    <h2 className="text-4xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2">
+        <section id="skills" className="py-20 px-4 bg-gradient-to-b from-white to-purple-50">
+            <article className="max-w-7xl mx-auto">
+                <section className="text-center mb-12">
+                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2">
                         Habilidades
                     </h2>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mt-6">
@@ -13,14 +14,13 @@ const Skills = () => {
                     </p>
                 </section>
 
-                <ul className="flex flex-wrap justify-center gap-4">
-                    {skillsData.map((skill) => (
-                        <li key={skill}>
-                            <span className="inline-block px-6 py-3 rounded-full border-2 border-purple-200 bg-purple-50 
-                                hover:bg-purple-100 hover:border-purple-400 transition-all duration-300 
-                                text-sm font-medium text-gray-800 cursor-default">
-                                {skill}
-                            </span>
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {skillsData.map((category, index) => (
+                        <li key={index}>
+                            <SkillCategory 
+                                category={category.category} 
+                                skills={category.skills} 
+                            />
                         </li>
                     ))}
                 </ul>

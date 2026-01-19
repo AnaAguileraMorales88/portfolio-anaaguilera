@@ -6,7 +6,7 @@ const Projects = () => {
         <section id="projects" className="py-20 px-4 bg-gradient-to-b from-purple-50 to-white">
             <article className="max-w-7xl mx-auto">
                 <section className="text-center mb-16">
-                    <h2 className="text-4xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2">
+                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2">
                         Proyectos
                     </h2>
                 </section>

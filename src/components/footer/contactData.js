@@ -1,7 +1,7 @@
 export const contactData = [
     {
         name: "Email",
-        href: "mailto:tu-email@ejemplo.com",
+        href: "mailto:anitaaguileram@gmail.com",
         ariaLabel: "Enviar email"
     },
     {
