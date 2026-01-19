@@ -25,7 +25,7 @@ const Hero = () => {
                     <img
                         src="src/assets/Images/Ana.jpg"
                         alt="Ana Aguilera, desarrolladora frontend"
-                        className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 object-cover rounded-full shadow-2xl"
+                        className="w-70 h-70 sm:w-82 sm:h-82 md:w-90 md:h-90 lg:w-120 lg:h-120 object-cover rounded-full shadow-2xl"
                     />
                 </figure>
             </article>
