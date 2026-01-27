@@ -23,14 +23,14 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => (
 
         <section className="flex gap-3">
             <a
-                href={githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex mx-auto items-center justify-center px-5 py-3 rounded-lg bg-gray-800 hover:bg-gray-900 text-white transition-all duration-300 text-sm font-medium"
-                aria-label={`Ver código de ${title} en GitHub`}
-            >
-                GitHub
-            </a>
+      href={githubLink}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex mx-auto items-center justify-center px-5 py-3 rounded-lg bg-gray-800 hover:bg-gray-900 text-white transition-all duration-300 text-sm font-medium hover:scale-120"
+    aria-label={`Ver código de ${title} en GitHub`}
+>
+    GitHub
+</a>
 
             {liveLink && (
                 <a

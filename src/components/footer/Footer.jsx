@@ -5,10 +5,13 @@ const Footer = () => {
         <footer id="contact" className="py-12 text-center border-t border-gray-200 bg-gray-50">
             <article className="max-w-7xl mx-auto px-4">
                 <article className="mb-6">
-                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block border-b-4 border-purple-600 pb-2 mb-4">
-                        Contacto
+                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block relative">
+                        <span className="relative inline-block pb-2">
+                            Contacto
+                            <span className="absolute bottom-0 left-0 h-1 bg-purple-600 animate-[underline_1.5s_ease-out_forwards] w-0 [animation-fill-mode:forwards]"></span>
+                        </span>
                     </h2>
-                    <h3 className="text-gray-800 text-lg">
+                    <h3 className="text-gray-800 text-lg mt-4">
                         Si deseas colaborar o necesitas más información, puedes ponerte en contacto conmigo.
                     </h3>
                 </article>
