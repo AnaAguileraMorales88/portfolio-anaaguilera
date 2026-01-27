@@ -2,8 +2,8 @@ import DownloadCV from '../downloadCV/DownloadCV';
 
 const Hero = () => {
     return (
-        <section 
-            id="hero" 
+        <section
+            id="hero"
             className="min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8"
         >
             <article className="max-w-6xl w-full grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -15,8 +15,8 @@ const Hero = () => {
                         Desarrollo sitios web modernos y funcionales, con atención al diseño, la accesibilidad y la experiencia del usuario.
                     </p>
                     <nav className="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-                        <a 
-                            href="#projects" 
+                        <a
+                            href="#projects"
                             className="inline-flex items-center justify-center px-8 py-3 bg-purple-600 text-white font-semibold rounded-lg hover:bg-purple-700 transition-colors duration-300 shadow-lg hover:shadow-xl"
                             aria-label="Ir a la sección de proyectos"
                         >

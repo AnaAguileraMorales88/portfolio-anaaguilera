@@ -2,7 +2,7 @@ export const projectsData = [
     {
         title: "La Quinta Pata",
         description: "Plataforma web para preservar y compartir las memorias de personas migrantes. Sistema completo con autenticación, gestión de contenido multimedia y base de datos.",
-        tags: ["React", "Spring Boot", "PostgreSQL", "JWT"],
+        tags: ["React 19", "Java 21", "Spring Data JPA + Hibernate", "Vite 7", "Spring Boot 3.x", "PostgreSQL", "JWT", "Tailwind CSS v4", "React rOUTER dom V7", "Axios", "React Hot TOast", "Vitest", ],
         githubLink: "https://github.com/La-Quinta-Pata",
         liveLink: null
     },
@@ -16,7 +16,7 @@ export const projectsData = [
     {
         title: "NONA",
         description: "Sitio web promocional para cortometraje. Diseño cinematográfico con énfasis en la experiencia visual y navegación intuitiva.",
-        tags: ["React", "Tailwind CSS", "Responsive Design"],
+        tags: ["JavaScript ES6", "React 18", "React Router DOM", "Tailwind CSS v4", "Vite", "Responsive Design", "100% Accesible"],
         githubLink: "https://github.com/AnaAguileraMorales88/Nona",
         liveLink: null
     }
