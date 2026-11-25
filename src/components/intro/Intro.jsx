@@ -34,7 +34,7 @@ const Letters = ({ word, offset }) =>
         </span>
     ));
 
-/** Intro animada: tu nombre aparece enfocándose, letra a letra, con el subrayador de marca. */
+/** Intro animada: tu nombre aparece enfocándose, letra a letra. */
 const Intro = () => {
     const { t } = useLanguage();
     const [phase, setPhase] = useState(() => (shouldShow() ? 'visible' : 'done'));
@@ -74,9 +74,9 @@ const Intro = () => {
                 <span aria-hidden="true" className="block sm:inline">
                     <Letters word={FIRST} offset={0} />
                 </span>{' '}
-                <mark aria-hidden="true" className="marker block sm:inline" style={{ '--marker-delay': '1.25s' }}>
+                <span aria-hidden="true" className="block sm:inline">
                     <Letters word={LAST} offset={FIRST.length + 1} />
-                </mark>
+                </span>
             </p>
 
             <p

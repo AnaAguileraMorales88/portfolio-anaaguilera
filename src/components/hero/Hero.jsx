@@ -19,23 +19,26 @@ const Hero = ({ state }) => {
             id="hero"
             state={state}
             labelledBy="hero-title"
-            innerClassName="grid items-center gap-12 md:grid-cols-[1.2fr_1fr] md:gap-10 lg:gap-16"
+            innerClassName="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-16"
         >
-            <header className="order-2 md:order-1">
+            <header className="order-2 lg:order-1">
                 <p className="eyebrow">Ana Aguilera · {hero.eyebrow}</p>
 
                 <h1
                     id="hero-title"
                     tabIndex={-1}
-                    className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-brand"
+                    className="mt-6 text-5xl font-bold uppercase leading-none tracking-tight text-brand sm:text-6xl lg:text-7xl"
                 >
-                    <span className="block">
-                        <span className="text-3xl sm:text-4xl">{hero.greeting}</span>{' '}
-                        <mark className="marker ml-[0.12em] text-7xl sm:text-8xl lg:text-9xl">{hero.name}</mark>
-                    </span>
-                    <span className="mt-4 block text-2xl sm:text-3xl">{hero.line2}</span>
-                    <span className="mt-1 block text-3xl sm:text-4xl lg:text-5xl">{hero.line3}</span>
+                    {hero.greeting} {hero.name}
                 </h1>
+
+                <ul className="mt-6 flex flex-col gap-1.5 text-base font-medium text-ink-soft sm:text-lg md:flex-row md:items-center md:gap-x-4 md:whitespace-nowrap lg:text-base xl:text-lg">
+                    {hero.titles.map((title, i) => (
+                        <li key={title} className={i > 0 ? 'md:border-l md:border-accent-line md:pl-4' : undefined}>
+                            {title}
+                        </li>
+                    ))}
+                </ul>
 
                 <p className="mt-9 flex min-h-9 items-center gap-3 text-lg font-bold text-ink sm:text-2xl">
                     <Icon name={ROLE_ICONS[index]} className="size-7 shrink-0 text-accent-bright" />
@@ -89,48 +92,16 @@ const Hero = ({ state }) => {
                 </p>
             </header>
 
-            <figure className="relative order-1 mx-auto w-full max-w-48 sm:max-w-xs md:order-2 md:max-w-sm">
+            <figure className="relative order-1 mx-auto w-full max-w-44 sm:max-w-60 lg:order-2 lg:max-w-sm">
                 <span
-                    className="absolute -inset-5 -z-10 rounded-[3rem] sm:-inset-8"
-                    style={{
-                        background:
-                            'linear-gradient(150deg, var(--color-accent-tint), var(--color-accent-line) 60%, var(--color-highlight))',
-                    }}
+                    className="absolute -inset-4 rounded-full border border-accent-line/70 sm:-inset-6"
                     aria-hidden="true"
                 ></span>
                 <img
                     src={anaPhoto}
                     alt={hero.photoAlt}
-                    className="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-2xl shadow-accent/25"
+                    className="relative aspect-square w-full rounded-full border border-accent-line bg-surface object-cover p-1.5 shadow-xl shadow-accent/10"
                 />
-
-                <span
-                    aria-hidden="true"
-                    className="card absolute -left-10 top-10 hidden w-56 p-3 sm:block lg:-left-16"
-                    style={{ animation: 'float 6s ease-in-out infinite' }}
-                >
-                    <span className="flex items-center gap-2 text-xs">
-                        <span className="grid size-7 place-items-center rounded-full bg-accent-tint font-bold text-accent">
-                            AA
-                        </span>
-                        <span className="font-mono text-ink-muted">ana · main</span>
-                        <span className="ml-auto rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
-                            ✓ {hero.cardMerged}
-                        </span>
-                    </span>
-                    <span className="mt-2 block font-mono text-sm font-bold text-brand">{hero.cardCommit}</span>
-                </span>
-
-                <span
-                    aria-hidden="true"
-                    className="card absolute -bottom-6 -right-6 hidden items-center gap-3 p-3 pr-5 sm:flex lg:-right-10"
-                    style={{ animation: 'float 7s ease-in-out 1s infinite' }}
-                >
-                    <span className="grid size-9 place-items-center rounded-xl bg-accent-bright text-white">
-                        <Icon name="code" className="size-5" />
-                    </span>
-                    <span className="text-sm font-bold text-brand">{hero.cardStack}</span>
-                </span>
             </figure>
         </Screen>
     );

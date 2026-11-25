@@ -25,10 +25,7 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink, index }) 
                 >
                     {title.slice(0, 2)}
                 </span>
-                <span className="mr-auto font-mono text-sm text-white/70" aria-hidden="true">
-                    {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="relative text-2xl font-bold text-white">{title}</h3>
+                <h3 className="relative ml-auto text-2xl font-bold text-white">{title}</h3>
             </header>
 
             <p className="flex-1 px-6 pt-6 leading-relaxed text-ink-muted">{description}</p>

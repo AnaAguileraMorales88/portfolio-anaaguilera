@@ -12,9 +12,9 @@ const About = ({ state }) => {
             <SectionHeading id="about-title" eyebrow={t.about.eyebrow} pre={t.about.pre} mark={t.about.mark} />
 
             <ol className="grid gap-5 md:grid-cols-3 lg:gap-6">
-                {aboutData[lang].map((card, index) => (
+                {aboutData[lang].map((card) => (
                     <li key={card.icon}>
-                        <AboutCard {...card} number={index + 1} />
+                        <AboutCard {...card} />
                     </li>
                 ))}
             </ol>
