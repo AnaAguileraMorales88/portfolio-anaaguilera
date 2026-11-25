@@ -4,19 +4,23 @@ import About from './components/about/About'
 import Skills from './components/skills/Skills'
 import Projects from './components/projects/Projects'
 import Experience from './components/experience/Experience'
+import Contact from './components/contact/Contact'
 import Footer from './components/footer/Footer'
 
 function App() {
   return (
-    <main>
+    <>
       <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+    </>
   )
 }
 

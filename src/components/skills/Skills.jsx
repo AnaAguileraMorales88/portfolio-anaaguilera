@@ -1,33 +1,21 @@
 import { skillsData } from './skillsData';
 import SkillCategory from './SkillCategory';
+import SectionHeading from '../ui/SectionHeading';
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-20 px-4 bg-gradient-to-b from-white to-purple-50">
-            <article className="max-w-7xl mx-auto">
-                <section className="text-center mb-12">
-                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block relative">
-                        <span className="relative inline-block pb-2">
-                            Habilidades
-                            <span className="absolute bottom-0 left-0 h-1 bg-purple-600 animate-[underline_1.5s_ease-out_forwards] w-0 [animation-fill-mode:forwards]"></span>
-                        </span>
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mt-6">
-                        Tecnologías y herramientas que utilizo para crear experiencias web accesibles, funcionales y estéticamente cuidadas.
-                    </p>
-                </section>
+        <section id="skills" aria-labelledby="skills-title" className="px-5 py-24 sm:px-8">
+            <SectionHeading id="skills-title" eyebrow="02 · Stack" title="Habilidades">
+                Tecnologías y herramientas que utilizo para crear experiencias web accesibles, funcionales y estéticamente cuidadas.
+            </SectionHeading>
 
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {skillsData.map((category, index) => (
-                        <li key={index}>
-                            <SkillCategory 
-                                category={category.category} 
-                                skills={category.skills} 
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </article>
+            <ul className="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {skillsData.map(({ category, skills }) => (
+                    <li key={category}>
+                        <SkillCategory category={category} skills={skills} />
+                    </li>
+                ))}
+            </ul>
         </section>
     );
 };

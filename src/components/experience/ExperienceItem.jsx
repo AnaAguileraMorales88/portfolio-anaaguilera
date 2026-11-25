@@ -1,21 +1,25 @@
 const ExperienceItem = ({ role, company, period, description }) => (
-    <li className="relative pl-8 pb-12 last:pb-0 border-l-2 border-purple-200 ml-4">
-        <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-600 border-4 border-white"></span>
+    <li className="relative border-l border-line pb-10 pl-8 last:pb-0 sm:pl-10">
+        <span
+            className="absolute -left-[5px] top-2 size-[9px] rounded-full bg-accent"
+            style={{ boxShadow: '0 0 0 4px var(--color-ink), 0 0 18px var(--color-accent)' }}
+            aria-hidden="true"
+        ></span>
 
-        <article className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-gray-100 ml-4">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{role}</h3>
-            
-            <section className="flex flex-col sm:flex-row sm:items-center text-sm text-purple-600 mb-4 gap-2">
-                <span className="font-medium">{company}</span>
-                <span className="hidden sm:inline text-gray-300" aria-hidden="true">•</span>
-                <time className="text-gray-600">{period}</time>
-            </section>
+        <article className="glass p-6 sm:p-7">
+            <header className="mb-5">
+                <h3 className="text-lg font-medium text-fg">{role}</h3>
+                <p className="mt-1 flex flex-wrap items-center gap-x-2 text-sm">
+                    <span className="text-accent">{company}</span>
+                    <span className="text-subtle" aria-hidden="true">·</span>
+                    <time className="text-subtle">{period}</time>
+                </p>
+            </header>
 
-            <ul className="space-y-2 text-gray-600 text-sm">
-                {description.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
-                        <span className="leading-relaxed">{item}</span>
+            <ul className="space-y-3 text-sm leading-relaxed text-muted">
+                {description.map((item) => (
+                    <li key={item} className="relative pl-5 before:absolute before:left-0 before:top-[0.6em] before:size-1 before:rounded-full before:bg-accent-cool">
+                        {item}
                     </li>
                 ))}
             </ul>
