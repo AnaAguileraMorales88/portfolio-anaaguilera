@@ -1,28 +1,24 @@
+import Screen from '../ui/Screen';
+import SectionHeading from '../ui/SectionHeading';
 import ProjectCard from './ProjectCard';
 import { projectsData } from './projectsData';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const Projects = () => {
+const Projects = ({ state }) => {
+    const { lang, t } = useLanguage();
+
     return (
-        <section id="projects" className="py-20 px-4 bg-gradient-to-b from-purple-50 to-white">
-            <article className="max-w-7xl mx-auto">
-                <section className="text-center mb-16">
-                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block relative">
-                        <span className="relative inline-block pb-2">
-                            Proyectos
-                            <span className="absolute bottom-0 left-0 h-1 bg-purple-600 animate-[underline_1.5s_ease-out_forwards] w-0 [animation-fill-mode:forwards]"></span>
-                        </span>
-                    </h2>
-                </section>
+        <Screen id="projects" state={state} labelledBy="projects-title">
+            <SectionHeading id="projects-title" eyebrow={t.projects.eyebrow} mark={t.projects.mark} />
 
-                <ul className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projectsData.map((project, index) => (
-                        <li key={index}>
-                            <ProjectCard {...project} />
-                        </li>
-                    ))}
-                </ul>
-            </article>
-        </section>
+            <ul className="carousel md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+                {projectsData[lang].map((project, i) => (
+                    <li key={project.title} className="reveal md:w-auto md:max-w-none" style={{ '--i': i + 2 }}>
+                        <ProjectCard {...project} />
+                    </li>
+                ))}
+            </ul>
+        </Screen>
     );
 };
 

@@ -1,28 +1,26 @@
+import Screen from '../ui/Screen';
+import SectionHeading from '../ui/SectionHeading';
 import AboutCard from './AboutCard';
 import { aboutData } from './aboutData';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const About = () => {
+const About = ({ state }) => {
+    const { lang, t } = useLanguage();
+
     return (
-        <section id="about" className="py-20 px-4 bg-gradient-to-b from-white to-purple-50">
-            <article className="max-w-7xl mx-auto">
-                <section className="text-center mb-16">
-                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block relative">
-                        <span className="relative inline-block pb-2">
-                            Sobre mí
-                            <span className="absolute bottom-0 left-0 h-1 bg-purple-600 animate-[underline_1.5s_ease-out_forwards] w-0 [animation-fill-mode:forwards]"></span>
-                        </span>
-                    </h2>
-                </section>
+        <Screen id="about" state={state} labelledBy="about-title">
+            <SectionHeading id="about-title" eyebrow={t.about.eyebrow} pre={t.about.pre} mark={t.about.mark}>
+                {t.about.intro}
+            </SectionHeading>
 
-                <ul className="grid md:grid-cols-3 gap-8 text-center">
-                    {aboutData.map((card, index) => (
-                        <li key={index}>
-                            <AboutCard {...card} />
-                        </li>
-                    ))}
-                </ul>
-            </article>
-        </section>
+            <ul className="carousel lg:mx-0 lg:grid lg:snap-none lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+                {aboutData[lang].map((card, i) => (
+                    <li key={card.icon} className="reveal lg:w-auto lg:max-w-none" style={{ '--i': i + 3 }}>
+                        <AboutCard {...card} />
+                    </li>
+                ))}
+            </ul>
+        </Screen>
     );
 };
 

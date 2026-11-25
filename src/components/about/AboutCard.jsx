@@ -1,11 +1,27 @@
-const AboutCard = ({ title, description }) => (
-    <article className="bg-white/90 backdrop-blur-sm p-9 rounded-xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-gray-100">
-        <h3 className="text-xl font-semibold mb-3 text-black border-b-2 border-purple-600 pb-2">
-            {title}
-        </h3>
-        <p className="text-gray-600 text-sm leading-relaxed text-justify">
-            {description}
-        </p>
+import Icon from '../ui/Icon';
+
+const AboutCard = ({ icon, title, description, points }) => (
+    <article className="card card-hover h-full p-6 lg:p-7">
+        <span
+            className="card-icon grid size-10 place-items-center rounded-xl bg-accent-soft text-accent"
+            aria-hidden="true"
+        >
+            <Icon name={icon} />
+        </span>
+        <h3 className="mt-5 text-lg font-bold text-brand">{title}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">{description}</p>
+        {points && (
+            <ul className="mt-3 space-y-1.5 text-sm text-ink-muted sm:text-base">
+                {points.map((point) => (
+                    <li
+                        key={point}
+                        className="relative pl-4 leading-relaxed before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-accent-bright"
+                    >
+                        {point}
+                    </li>
+                ))}
+            </ul>
+        )}
     </article>
 );
 

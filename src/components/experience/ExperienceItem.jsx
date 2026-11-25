@@ -1,25 +1,72 @@
-const ExperienceItem = ({ role, company, period, description }) => (
-    <li className="relative pl-8 pb-12 last:pb-0 border-l-2 border-purple-200 ml-4">
-        <span className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-purple-600 border-4 border-white"></span>
+import Icon from '../ui/Icon';
 
-        <article className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-gray-100 ml-4">
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">{role}</h3>
-            
-            <section className="flex flex-col sm:flex-row sm:items-center text-sm text-purple-600 mb-4 gap-2">
-                <span className="font-medium">{company}</span>
-                <span className="hidden sm:inline text-gray-300" aria-hidden="true">•</span>
-                <time className="text-gray-600">{period}</time>
-            </section>
+/**
+ * Cada experiencia es un desplegable nativo (<details>): poco y directo, con el detalle a un clic.
+ * Los de un mismo grupo comparten "name", así al abrir uno se cierra el anterior.
+ */
+const ExperienceItem = ({
+    role,
+    company,
+    period,
+    description,
+    group,
+    defaultOpen = false,
+    compact = false,
+    repoLabel,
+}) => (
+    <li>
+        <details name={`experiencia-${group}`} open={defaultOpen} className="card group overflow-hidden">
+            <summary className="flex cursor-pointer list-none items-center gap-4 p-4 transition-colors hover:bg-accent-soft/40 sm:px-5 [&::-webkit-details-marker]:hidden">
+                {!compact && (
+                    <span className="hidden w-24 shrink-0 font-mono text-sm font-bold text-accent sm:block">
+                        {period}
+                    </span>
+                )}
+                <hgroup className="min-w-0 flex-1">
+                    <h3 className="font-bold leading-snug text-brand">{role}</h3>
+                    <p className="mt-0.5 text-sm text-ink-muted">
+                        {company}
+                        <span className={`font-mono text-accent ${compact ? '' : 'sm:hidden'}`}> · {period}</span>
+                    </p>
+                </hgroup>
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-open:rotate-180">
+                    <Icon name="chevron" className="size-4" />
+                </span>
+            </summary>
 
-            <ul className="space-y-2 text-gray-600 text-sm">
-                {description.map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-purple-400 flex-shrink-0"></span>
-                        <span className="leading-relaxed">{item}</span>
-                    </li>
-                ))}
+            <ul
+                className={`details-body space-y-2 border-t border-accent-line/50 px-4 pb-4 pt-3 text-sm text-ink-muted sm:px-5 ${
+                    compact ? '' : 'sm:pl-[8.25rem] sm:pr-6'
+                }`}
+            >
+                {description.map((item) => {
+                    const text = typeof item === 'string' ? item : item.text;
+                    const link = typeof item === 'string' ? null : item.link;
+                    return (
+                        <li
+                            key={text}
+                            className="relative pl-4 leading-relaxed before:absolute before:left-0 before:top-[0.6em] before:size-1.5 before:rounded-full before:bg-accent-bright"
+                        >
+                            {text}
+                            {link && (
+                                <>
+                                    {' '}
+                                    <a
+                                        href={link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1 font-bold text-accent underline underline-offset-4 hover:text-accent-strong"
+                                    >
+                                        <Icon name="github" className="size-3.5" />
+                                        {repoLabel}
+                                    </a>
+                                </>
+                            )}
+                        </li>
+                    );
+                })}
             </ul>
-        </article>
+        </details>
     </li>
 );
 

@@ -1,34 +1,26 @@
-import { skillsData } from './skillsData';
+import Screen from '../ui/Screen';
+import SectionHeading from '../ui/SectionHeading';
 import SkillCategory from './SkillCategory';
+import { skillsData } from './skillsData';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const Skills = () => {
+const Skills = ({ state }) => {
+    const { lang, t } = useLanguage();
+
     return (
-        <section id="skills" className="py-20 px-4 bg-gradient-to-b from-white to-purple-50">
-            <article className="max-w-7xl mx-auto">
-                <section className="text-center mb-12">
-                    <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 inline-block relative">
-                        <span className="relative inline-block pb-2">
-                            Habilidades
-                            <span className="absolute bottom-0 left-0 h-1 bg-purple-600 animate-[underline_1.5s_ease-out_forwards] w-0 [animation-fill-mode:forwards]"></span>
-                        </span>
-                    </h2>
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mt-6">
-                        Tecnologías y herramientas que utilizo para crear experiencias web accesibles, funcionales y estéticamente cuidadas.
-                    </p>
-                </section>
+        <Screen id="skills" state={state} labelledBy="skills-title">
+            <SectionHeading id="skills-title" eyebrow={t.skills.eyebrow} mark={t.skills.mark} hideIntroOnShortScreens>
+                {t.skills.intro}
+            </SectionHeading>
 
-                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {skillsData.map((category, index) => (
-                        <li key={index}>
-                            <SkillCategory 
-                                category={category.category} 
-                                skills={category.skills} 
-                            />
-                        </li>
-                    ))}
-                </ul>
-            </article>
-        </section>
+            <ul className="carousel md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+                {skillsData[lang].map((category, i) => (
+                    <li key={category.icon} className="reveal md:w-auto md:max-w-none" style={{ '--i': i + 3 }}>
+                        <SkillCategory {...category} />
+                    </li>
+                ))}
+            </ul>
+        </Screen>
     );
 };
 

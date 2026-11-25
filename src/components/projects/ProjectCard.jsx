@@ -1,51 +1,77 @@
-const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => (
-    <article className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 flex flex-col h-full">
+import Icon from '../ui/Icon';
+import { useLanguage } from '../../i18n/useLanguage';
 
-        <section className="mb-4">
-            <h3 className="text-xl font-bold text-black hover:text-purple-700 transition-colors text-center">
-                {title}
-            </h3>
-        </section>
+const VISIBLE_TAGS = 4;
 
-        <p className="text-gray-600 text-sm mb-6 flex-1 leading-relaxed text-justify">
-            {description}
-        </p>
-
-        <ul className="flex flex-wrap gap-2 mb-6">
-            {tags.map((tag) => (
-                <li key={tag}>
-                    <span className="text-xs px-1 py-1 rounded-full bg-purple-100 text-purple-700 font-medium">
-                        {tag}
-                    </span>
-                </li>
-            ))}
-        </ul>
-
-        <section className="flex gap-3">
-            <a
-      href={githubLink}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex mx-auto items-center justify-center px-5 py-3 rounded-lg bg-gray-800 hover:bg-gray-900 text-white transition-all duration-300 text-sm font-medium hover:scale-120"
-    aria-label={`Ver código de ${title} en GitHub`}
->
-    GitHub
-</a>
-
-            {liveLink && (
-                <a
-                    href={liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-all duration-300 text-sm font-medium flex-1"
-                    aria-label={`Ver demo en vivo de ${title}`}
-                >
-                    Demo
-                </a>
-            )}
-        </section>
-
-    </article>
+const ProjectLink = ({ href, label, icon, children }) => (
+    <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-bold text-accent transition-colors hover:bg-accent-soft"
+    >
+        <Icon name={icon} className="size-4" />
+        {children}
+        <Icon name="arrowUpRight" className="size-3.5 opacity-60" />
+    </a>
 );
+
+const ProjectCard = ({ title, description, tags, liveLink, figmaLink, githubLink }) => {
+    const { t } = useLanguage();
+    const visible = tags.slice(0, VISIBLE_TAGS);
+    const hidden = tags.slice(VISIBLE_TAGS);
+
+    return (
+        <article className="card card-hover flex h-full flex-col p-5">
+            <header className="flex items-center gap-3">
+                <span
+                    className="card-icon grid size-9 shrink-0 place-items-center rounded-lg bg-accent-soft text-accent"
+                    aria-hidden="true"
+                >
+                    <Icon name="folder" className="size-[18px]" />
+                </span>
+                <h3 className="text-lg font-bold text-brand">{title}</h3>
+            </header>
+
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-muted">{description}</p>
+
+            <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={`${t.projects.tech} ${title}`}>
+                {visible.map((tag) => (
+                    <li key={tag} className="chip">
+                        {tag}
+                    </li>
+                ))}
+                {hidden.length > 0 && (
+                    <li className="chip border-dashed" title={hidden.join(', ')}>
+                        +{hidden.length}
+                        <span className="sr-only">
+                            {' '}
+                            {t.projects.more}: {hidden.join(', ')}
+                        </span>
+                    </li>
+                )}
+            </ul>
+
+            <footer className="-mx-2 mt-4 flex flex-wrap gap-1 border-t border-accent-line/50 pt-3">
+                {liveLink && (
+                    <ProjectLink href={liveLink} icon="globe" label={`${t.projects.demo} ${title}`}>
+                        {t.projects.web}
+                    </ProjectLink>
+                )}
+                {figmaLink && (
+                    <ProjectLink href={figmaLink} icon="figma" label={`${t.projects.figma} ${title}`}>
+                        Figma
+                    </ProjectLink>
+                )}
+                {githubLink && (
+                    <ProjectLink href={githubLink} icon="github" label={`${t.projects.code} ${title} (GitHub)`}>
+                        GitHub
+                    </ProjectLink>
+                )}
+            </footer>
+        </article>
+    );
+};
 
 export default ProjectCard;
