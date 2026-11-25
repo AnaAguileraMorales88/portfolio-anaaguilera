@@ -2,7 +2,30 @@ const laQuintaPataTags = ['React 19', 'Java 21', 'Spring Data JPA + Hibernate', 
 const clubNostalgiaTags = ['React 19', 'React Router 7', 'Java 21', 'Spring Boot 3.5.7', 'Tailwind CSS 4', 'Spring Security', 'Spring Data JPA', 'Base de datos H2', 'JWT (java-jwt)', 'SendGrid', 'Axios'];
 // GitHub de Primer Commit: añade aquí la dirección del repositorio cuando la tengas
 const PRIMER_COMMIT_GITHUB = null;
-const primerCommitTags = ['React', 'Vite', 'Tailwind CSS'];
+// Las 4 primeras se ven en la tarjeta; el resto aparece en el "+N"
+const primerCommitTags = [
+    'Java 21',
+    'Spring Boot 3.5',
+    'React 19',
+    'PostgreSQL',
+    'Spring Security',
+    'JWT',
+    'OAuth 2.0 (Google)',
+    'Flyway',
+    'H2',
+    'React Router 7',
+    'Tailwind CSS 3',
+    'Axios',
+    'Vite 7',
+    'JUnit 5',
+    'MockMvc',
+    'Vitest',
+    'Testing Library',
+    'Playwright',
+    'axe-core',
+    'Docker Compose',
+    'Caddy (HTTPS)',
+];
 
 const nonaTags = ['JavaScript ES6', 'React 18', 'React Router DOM', 'Tailwind CSS v4', 'Vite', 'Responsive Design'];
 
@@ -10,8 +33,8 @@ export const projectsData = {
     es: [
         {
             title: 'Primer Commit',
-            description: 'Comunidad tech para quienes empiezan: noticias, ofertas de empleo junior y prácticas, foro y testimonios. Plataforma accesible, rápida y segura, en español, catalán e inglés.',
-            tags: [...primerCommitTags, 'Multiidioma'],
+            description: 'Comunidad tech para quienes empiezan: noticias, empleo junior, foro y testimonios. Importa noticias por RSS y ofertas de APIs públicas de empleo, con inicio de sesión con Google. En tres idiomas y con tema claro/oscuro.',
+            tags: primerCommitTags,
             githubLink: PRIMER_COMMIT_GITHUB,
             liveLink: 'https://primercommit.es/',
         },
@@ -40,8 +63,8 @@ export const projectsData = {
     en: [
         {
             title: 'Primer Commit',
-            description: 'Tech community for people starting out: news, junior job and internship offers, a forum and real stories. An accessible, fast and secure platform in Spanish, Catalan and English.',
-            tags: [...primerCommitTags, 'Multilingual'],
+            description: 'Tech community for people starting out: news, junior jobs, a forum and real stories. It imports news via RSS and job offers from public APIs, with Google sign-in. Available in three languages with light/dark theme.',
+            tags: primerCommitTags,
             githubLink: PRIMER_COMMIT_GITHUB,
             liveLink: 'https://primercommit.es/',
         },
