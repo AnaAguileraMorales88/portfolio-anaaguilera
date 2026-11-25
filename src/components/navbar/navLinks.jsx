@@ -1,7 +1,9 @@
+/** Secciones del portfolio, en orden. El texto de cada una está en src/i18n/ui.js (nav). */
 export const navLinks = [
-    { name: 'Sobre mí', href: '#about' },
-    { name: 'Habilidades', href: '#skills' },
-    { name: 'Proyectos', href: '#projects' },
-    { name: 'Experiencia', href: '#experience' },
-    { name: 'Contacto', href: '#contact' },
+    { id: 'hero', icon: 'home' },
+    { id: 'about', icon: 'user' },
+    { id: 'skills', icon: 'code' },
+    { id: 'projects', icon: 'folder' },
+    { id: 'experience', icon: 'route' },
+    { id: 'contact', icon: 'mail' },
 ];

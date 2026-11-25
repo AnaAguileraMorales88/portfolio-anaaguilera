@@ -1,66 +1,138 @@
+import { useState } from 'react';
+import Screen from '../ui/Screen';
+import Icon from '../ui/Icon';
 import DownloadCV from '../downloadCV/DownloadCV';
-import NeuralBackground from './NeuralBackground';
 import { useTypewriter } from '../../hooks/useTypewriter';
+import { useLanguage } from '../../i18n/useLanguage';
 import anaPhoto from '../../assets/Images/Ana.jpg';
 
-const ROLES = [
-    'Desarrolladora Frontend',
-    'Fullstack con React y Spring Boot',
-    'Diseño accesible y elegante',
-    'Código limpio y funcional',
-];
+const ROLE_ICONS = ['code', 'accessibility', 'sparkles', 'commit'];
 
-const Hero = () => {
-    const typed = useTypewriter(ROLES);
+const Hero = ({ state }) => {
+    const { t } = useLanguage();
+    const hero = t.hero;
+    const [paused, setPaused] = useState(false);
+    const { text, index } = useTypewriter(hero.roles, { paused });
 
     return (
-        <section
+        <Screen
             id="hero"
-            aria-labelledby="hero-title"
-            className="relative isolate flex min-h-svh overflow-hidden items-center px-5 pb-16 pt-28 sm:px-8"
+            state={state}
+            labelledBy="hero-title"
+            innerClassName="grid items-center gap-12 md:grid-cols-[1.2fr_1fr] md:gap-10 lg:gap-16"
         >
-            <NeuralBackground />
+            <header className="order-2 md:order-1">
+                <p className="eyebrow">Ana Aguilera · {hero.eyebrow}</p>
 
-            <article className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.2fr_1fr] md:gap-16">
-                <header className="order-2 space-y-7 text-center md:order-1 md:text-left">
-                    <p className="chip inline-flex min-h-8 items-center gap-2 font-mono text-[0.8rem]">
-                        <span className="size-1.5 animate-pulse rounded-full bg-accent" aria-hidden="true"></span>
-                        <span className="sr-only">{ROLES.join(', ')}</span>
-                        <span aria-hidden="true" className="text-fg/90">
-                            {typed}
-                            <span className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] animate-pulse bg-accent"></span>
+                <h1
+                    id="hero-title"
+                    tabIndex={-1}
+                    className="mt-6 font-bold uppercase leading-[0.95] tracking-tight text-brand"
+                >
+                    <span className="block">
+                        <span className="text-3xl sm:text-4xl">{hero.greeting}</span>{' '}
+                        <mark className="marker ml-[0.12em] text-7xl sm:text-8xl lg:text-9xl">{hero.name}</mark>
+                    </span>
+                    <span className="mt-4 block text-2xl sm:text-3xl">{hero.line2}</span>
+                    <span className="mt-1 block text-3xl sm:text-4xl lg:text-5xl">{hero.line3}</span>
+                </h1>
+
+                <p className="mt-9 flex min-h-9 items-center gap-3 text-lg font-bold text-ink sm:text-2xl">
+                    <Icon name={ROLE_ICONS[index]} className="size-7 shrink-0 text-accent-bright" />
+                    <span className="sr-only">{hero.roles.join('. ')}</span>
+                    <span aria-hidden="true">
+                        {text}
+                        <span className="ml-0.5 inline-block h-[1.1em] w-[3px] translate-y-[3px] animate-pulse rounded-full bg-accent-bright"></span>
+                    </span>
+                </p>
+
+                <p className="mt-3 flex items-center gap-2 pl-10">
+                    {hero.roles.map((role, i) => (
+                        <span
+                            key={role}
+                            aria-hidden="true"
+                            className={`h-1.5 rounded-full transition-all duration-500 ${
+                                i === index ? 'w-8 bg-accent-bright' : 'w-3 bg-highlight'
+                            }`}
+                        ></span>
+                    ))}
+                    <button
+                        type="button"
+                        onClick={() => setPaused(!paused)}
+                        aria-label={paused ? hero.play : hero.pause}
+                        className="ml-2 grid size-7 place-items-center rounded-full border border-accent-line text-accent transition-colors hover:bg-accent-soft"
+                    >
+                        <Icon name={paused ? 'play' : 'pause'} className="size-3" />
+                    </button>
+                </p>
+
+                <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-soft">{hero.description}</p>
+
+                <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-soft">
+                    {hero.links.map((part) =>
+                        typeof part === 'string' ? (
+                            part
+                        ) : (
+                            <a key={part.href} href={part.href} className="text-link">
+                                {part.text}
+                            </a>
+                        ),
+                    )}
+                </p>
+
+                <p className="mt-9 flex flex-col gap-3 sm:flex-row">
+                    <a href="#projects" className="btn-primary">
+                        {hero.cta}
+                        <Icon name="arrowRight" className="size-4" />
+                    </a>
+                    <DownloadCV />
+                </p>
+            </header>
+
+            <figure className="relative order-1 mx-auto w-full max-w-48 sm:max-w-xs md:order-2 md:max-w-sm">
+                <span
+                    className="absolute -inset-5 -z-10 rounded-[3rem] sm:-inset-8"
+                    style={{
+                        background:
+                            'linear-gradient(150deg, var(--color-accent-tint), var(--color-accent-line) 60%, var(--color-highlight))',
+                    }}
+                    aria-hidden="true"
+                ></span>
+                <img
+                    src={anaPhoto}
+                    alt={hero.photoAlt}
+                    className="aspect-[4/5] w-full rounded-[2.5rem] object-cover shadow-2xl shadow-accent/25"
+                />
+
+                <span
+                    aria-hidden="true"
+                    className="card absolute -left-10 top-10 hidden w-56 p-3 sm:block lg:-left-16"
+                    style={{ animation: 'float 6s ease-in-out infinite' }}
+                >
+                    <span className="flex items-center gap-2 text-xs">
+                        <span className="grid size-7 place-items-center rounded-full bg-accent-tint font-bold text-accent">
+                            AA
                         </span>
-                    </p>
+                        <span className="font-mono text-ink-muted">ana · main</span>
+                        <span className="ml-auto rounded-full bg-emerald-50 px-2 py-0.5 font-medium text-emerald-700">
+                            ✓ {hero.cardMerged}
+                        </span>
+                    </span>
+                    <span className="mt-2 block font-mono text-sm font-bold text-brand">{hero.cardCommit}</span>
+                </span>
 
-                    <h1 id="hero-title" className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-                        Hola, soy <em className="font-serif font-normal text-gradient">Ana</em>
-                    </h1>
-
-                    <p className="mx-auto max-w-lg text-lg leading-relaxed text-muted md:mx-0">
-                        Desarrollo sitios web modernos y funcionales, con atención al diseño, la accesibilidad y la experiencia del usuario.
-                    </p>
-
-                    <nav aria-label="Acciones principales" className="flex flex-col justify-center gap-4 pt-2 sm:flex-row md:justify-start">
-                        <a href="#projects" className="btn-primary">
-                            Descubre mis creaciones
-                        </a>
-                        <DownloadCV />
-                    </nav>
-                </header>
-
-                <figure className="order-1 mx-auto md:order-2">
-                    <img
-                        src={anaPhoto}
-                        alt="Ana Aguilera, desarrolladora frontend"
-                        className="size-56 rounded-full object-cover p-1.5 ring-1 ring-line sm:size-72 lg:size-80"
-                        style={{
-                            background: 'linear-gradient(140deg, var(--color-accent), transparent 45%, var(--color-accent-cool))',
-                            boxShadow: '0 0 80px -20px rgb(183 169 240 / 0.45)',
-                        }}
-                    />
-                </figure>
-            </article>
-        </section>
+                <span
+                    aria-hidden="true"
+                    className="card absolute -bottom-6 -right-6 hidden items-center gap-3 p-3 pr-5 sm:flex lg:-right-10"
+                    style={{ animation: 'float 7s ease-in-out 1s infinite' }}
+                >
+                    <span className="grid size-9 place-items-center rounded-xl bg-accent-bright text-white">
+                        <Icon name="code" className="size-5" />
+                    </span>
+                    <span className="text-sm font-bold text-brand">{hero.cardStack}</span>
+                </span>
+            </figure>
+        </Screen>
     );
 };
 

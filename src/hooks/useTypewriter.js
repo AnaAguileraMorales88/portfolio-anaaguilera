@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react';
 
+const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 /**
  * Escribe y borra una lista de frases en bucle, como si alguien tecleara.
- * Con "reducir movimiento" activado muestra la primera frase fija.
+ * Devuelve el texto visible y el índice de la frase actual.
+ * Con "reducir movimiento" o en pausa, la frase se queda quieta.
  */
-export const useTypewriter = (words, { typeSpeed = 70, deleteSpeed = 35, pause = 1800 } = {}) => {
+export const useTypewriter = (words, { paused = false, typeSpeed = 60, deleteSpeed = 30, pause = 2200 } = {}) => {
     const [index, setIndex] = useState(0);
     const [text, setText] = useState('');
     const [deleting, setDeleting] = useState(false);
-    const [reduceMotion] = useState(
-        () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    );
+    const [reduceMotion] = useState(prefersReducedMotion);
+
+    const current = index % words.length;
+    const word = words[current];
 
     useEffect(() => {
-        if (reduceMotion) return;
+        if (reduceMotion || paused) return;
 
-        const word = words[index % words.length];
         let delay = deleting ? deleteSpeed : typeSpeed;
-
         if (!deleting && text === word) delay = pause;
-        if (deleting && text === '') delay = 400;
+        if (deleting && text === '') delay = 350;
 
         const timer = setTimeout(() => {
             if (!deleting && text === word) {
@@ -33,7 +35,7 @@ export const useTypewriter = (words, { typeSpeed = 70, deleteSpeed = 35, pause =
         }, delay);
 
         return () => clearTimeout(timer);
-    }, [text, deleting, index, words, typeSpeed, deleteSpeed, pause, reduceMotion]);
+    }, [text, deleting, word, paused, reduceMotion, typeSpeed, deleteSpeed, pause]);
 
-    return reduceMotion ? words[0] : text;
+    return { text: reduceMotion ? word : text, index: current };
 };

@@ -1,20 +1,24 @@
+import Screen from '../ui/Screen';
+import SectionHeading from '../ui/SectionHeading';
 import ProjectCard from './ProjectCard';
 import { projectsData } from './projectsData';
-import SectionHeading from '../ui/SectionHeading';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const Projects = () => {
+const Projects = ({ state }) => {
+    const { lang, t } = useLanguage();
+
     return (
-        <section id="projects" aria-labelledby="projects-title" className="px-5 py-24 sm:px-8">
-            <SectionHeading id="projects-title" eyebrow="03 · Trabajo" title="Proyectos" />
+        <Screen id="projects" state={state} labelledBy="projects-title">
+            <SectionHeading id="projects-title" eyebrow={t.projects.eyebrow} mark={t.projects.mark} />
 
-            <ul className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {projectsData.map((project) => (
+            <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {projectsData[lang].map((project, index) => (
                     <li key={project.title}>
-                        <ProjectCard {...project} />
+                        <ProjectCard {...project} index={index} />
                     </li>
                 ))}
             </ul>
-        </section>
+        </Screen>
     );
 };
 

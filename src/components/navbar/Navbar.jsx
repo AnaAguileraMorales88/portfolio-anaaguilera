@@ -1,62 +1,72 @@
-import { useState } from 'react';
 import { navLinks } from './navLinks';
-import MenuIcon from './MenuIcon';
+import Icon from '../ui/Icon';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const LANGS = ['es', 'en'];
+
+/**
+ * Cabecera: logo, menú de iconos y selector de idioma.
+ * En móvil el menú baja a una barra inferior, como en una app.
+ */
+const Navbar = ({ active }) => {
+    const { t, lang, setLang } = useLanguage();
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-ink/70 backdrop-blur-xl">
-            <nav
-                className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8"
-                aria-label="Navegación principal"
-            >
-                <a href="#hero" className="font-serif text-2xl italic text-gradient" aria-label="Ir al inicio">
-                    Portfolio
-                </a>
-
-                <ul className="hidden items-center gap-1 md:flex">
-                    {navLinks.map((link) => (
-                        <li key={link.name}>
-                            <a
-                                href={link.href}
-                                className="rounded-full px-4 py-2 text-sm text-muted transition-colors duration-300 hover:bg-white/5 hover:text-fg"
-                            >
-                                {link.name}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-
-                <button
-                    type="button"
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="inline-flex items-center justify-center rounded-full p-2 text-muted transition-colors hover:bg-white/5 hover:text-fg md:hidden"
-                    aria-expanded={isOpen}
-                    aria-controls="menu-movil"
-                    aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+        <header className="fixed inset-x-0 top-0 z-50 flex h-16 items-center justify-between gap-4 border-b border-accent-line/50 bg-canvas/95 px-5 sm:h-20 md:bg-canvas/75 md:backdrop-blur-xl sm:px-8 xl:px-[calc((100%-72rem)/2)]">
+            <a href="#hero" className="flex items-center gap-3" aria-label={t.home}>
+                <span
+                    className="grid size-10 place-items-center rounded-xl text-lg font-bold text-white shadow-md"
+                    style={{ background: 'linear-gradient(135deg, #6366f1, var(--color-accent))' }}
+                    aria-hidden="true"
                 >
-                    <MenuIcon isOpen={isOpen} />
-                </button>
-            </nav>
+                    A
+                </span>
+                <span className="hidden text-lg font-bold text-brand lg:inline">Ana Aguilera</span>
+            </a>
 
-            {isOpen && (
-                <nav id="menu-movil" className="border-t border-line bg-ink/95 md:hidden" aria-label="Navegación móvil">
-                    <ul className="space-y-1 px-5 py-4">
-                        {navLinks.map((link) => (
-                            <li key={link.name}>
+            <nav aria-label={t.navLabel} className="fixed inset-x-4 bottom-4 z-50 md:static md:inset-auto">
+                <ul className="flex items-center justify-between gap-1 rounded-full border border-accent-line/70 bg-surface/90 p-1.5 shadow-lg shadow-accent/10 backdrop-blur-xl md:shadow-none">
+                    {navLinks.map(({ id, icon }) => {
+                        const isActive = active === id;
+                        return (
+                            <li key={id}>
                                 <a
-                                    href={link.href}
-                                    className="block rounded-xl px-4 py-3 text-base text-muted transition-colors hover:bg-white/5 hover:text-fg"
-                                    onClick={() => setIsOpen(false)}
+                                    href={`#${id}`}
+                                    aria-current={isActive ? 'page' : undefined}
+                                    className={`group relative grid size-11 place-items-center rounded-full transition-colors duration-300 ${
+                                        isActive
+                                            ? 'bg-accent-bright text-white shadow-md shadow-accent/30'
+                                            : 'text-ink-muted hover:bg-accent-soft hover:text-accent'
+                                    }`}
                                 >
-                                    {link.name}
+                                    <Icon name={icon} />
+                                    <span className="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap rounded-lg bg-brand px-2.5 py-1 text-xs font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 max-md:sr-only md:bottom-auto md:top-full md:mb-0 md:mt-3">
+                                        {t.nav[id]}
+                                    </span>
                                 </a>
                             </li>
-                        ))}
-                    </ul>
-                </nav>
-            )}
+                        );
+                    })}
+                </ul>
+            </nav>
+
+            <menu aria-label={t.langLabel} className="flex rounded-full border border-accent-line/70 bg-surface/90 p-1">
+                {LANGS.map((code) => (
+                    <li key={code}>
+                        <button
+                            type="button"
+                            lang={code}
+                            onClick={() => setLang(code)}
+                            aria-pressed={lang === code}
+                            className={`rounded-full px-3 py-1.5 text-xs font-bold uppercase transition-colors ${
+                                lang === code ? 'bg-accent-soft text-accent' : 'text-ink-muted hover:text-accent'
+                            }`}
+                        >
+                            {code}
+                        </button>
+                    </li>
+                ))}
+            </menu>
         </header>
     );
 };

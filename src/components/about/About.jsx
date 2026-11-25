@@ -1,20 +1,24 @@
+import Screen from '../ui/Screen';
+import SectionHeading from '../ui/SectionHeading';
 import AboutCard from './AboutCard';
 import { aboutData } from './aboutData';
-import SectionHeading from '../ui/SectionHeading';
+import { useLanguage } from '../../i18n/useLanguage';
 
-const About = () => {
+const About = ({ state }) => {
+    const { lang, t } = useLanguage();
+
     return (
-        <section id="about" aria-labelledby="about-title" className="px-5 py-24 sm:px-8">
-            <SectionHeading id="about-title" eyebrow="01 · Perfil" title="Sobre mí" />
+        <Screen id="about" state={state} labelledBy="about-title">
+            <SectionHeading id="about-title" eyebrow={t.about.eyebrow} pre={t.about.pre} mark={t.about.mark} />
 
-            <ul className="mx-auto grid max-w-6xl gap-6 md:grid-cols-3">
-                {aboutData.map((card) => (
-                    <li key={card.title}>
-                        <AboutCard {...card} />
+            <ol className="grid gap-5 md:grid-cols-3 lg:gap-6">
+                {aboutData[lang].map((card, index) => (
+                    <li key={card.icon}>
+                        <AboutCard {...card} number={index + 1} />
                     </li>
                 ))}
-            </ul>
-        </section>
+            </ol>
+        </Screen>
     );
 };
 

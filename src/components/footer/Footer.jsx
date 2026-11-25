@@ -1,8 +1,12 @@
+import { useLanguage } from '../../i18n/useLanguage';
+
 const Footer = () => {
+    const { t } = useLanguage();
+
     return (
-        <footer className="border-t border-line px-5 py-8 text-center sm:px-8">
-            <p className="text-sm text-subtle">
-                © {new Date().getFullYear()} Ana Aguilera. Todos los derechos reservados.
+        <footer className="px-5 pb-28 text-center md:pb-8">
+            <p className="text-sm text-ink-muted">
+                © {new Date().getFullYear()} Ana Aguilera. {t.footer}
             </p>
         </footer>
     );
