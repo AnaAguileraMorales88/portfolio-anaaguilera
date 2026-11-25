@@ -11,10 +11,10 @@ const Projects = ({ state }) => {
         <Screen id="projects" state={state} labelledBy="projects-title">
             <SectionHeading id="projects-title" eyebrow={t.projects.eyebrow} mark={t.projects.mark} />
 
-            <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {projectsData[lang].map((project, index) => (
+            <ul className="grid gap-6 md:grid-cols-2">
+                {projectsData[lang].map((project) => (
                     <li key={project.title}>
-                        <ProjectCard {...project} index={index} />
+                        <ProjectCard {...project} />
                     </li>
                 ))}
             </ul>

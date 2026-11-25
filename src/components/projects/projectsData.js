@@ -1,9 +1,20 @@
 const laQuintaPataTags = ['React 19', 'Java 21', 'Spring Data JPA + Hibernate', 'Vite 7', 'Spring Boot 3.x', 'PostgreSQL', 'JWT', 'Tailwind CSS v4', 'React Router DOM v7', 'Axios', 'React Hot Toast', 'Vitest'];
 const clubNostalgiaTags = ['React 19', 'React Router 7', 'Java 21', 'Spring Boot 3.5.7', 'Tailwind CSS 4', 'Spring Security', 'Spring Data JPA', 'Base de datos H2', 'JWT (java-jwt)', 'SendGrid', 'Axios'];
+// GitHub de Primer Commit: añade aquí la dirección del repositorio cuando la tengas
+const PRIMER_COMMIT_GITHUB = null;
+const primerCommitTags = ['React', 'Vite', 'Tailwind CSS'];
+
 const nonaTags = ['JavaScript ES6', 'React 18', 'React Router DOM', 'Tailwind CSS v4', 'Vite', 'Responsive Design'];
 
 export const projectsData = {
     es: [
+        {
+            title: 'Primer Commit',
+            description: 'Comunidad tech para quienes empiezan: noticias, ofertas de empleo junior y prácticas, foro y testimonios. Plataforma accesible, rápida y segura, en español, catalán e inglés.',
+            tags: [...primerCommitTags, 'Multiidioma'],
+            githubLink: PRIMER_COMMIT_GITHUB,
+            liveLink: 'https://primercommit.es/',
+        },
         {
             title: 'La Quinta Pata',
             description: 'Plataforma web para preservar y compartir las memorias de personas migrantes. Sistema completo con autenticación, gestión de contenido multimedia y base de datos.',
@@ -27,6 +38,13 @@ export const projectsData = {
         },
     ],
     en: [
+        {
+            title: 'Primer Commit',
+            description: 'Tech community for people starting out: news, junior job and internship offers, a forum and real stories. An accessible, fast and secure platform in Spanish, Catalan and English.',
+            tags: [...primerCommitTags, 'Multilingual'],
+            githubLink: PRIMER_COMMIT_GITHUB,
+            liveLink: 'https://primercommit.es/',
+        },
         {
             title: 'La Quinta Pata',
             description: 'Web platform to preserve and share the memories of migrants. A complete system with authentication, multimedia content management and a database.',

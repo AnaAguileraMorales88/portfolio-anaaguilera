@@ -110,6 +110,33 @@ const strokes = {
             <path d="m12 14.5 3 6" />
         </>
     ),
+    shield: (
+        <>
+            <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z" />
+            <path d="m9 12 2 2 4-4" />
+        </>
+    ),
+    cloud: <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5z" />,
+    globe: (
+        <>
+            <circle cx="12" cy="12" r="9" />
+            <path d="M3 12h18" />
+            <path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18" />
+        </>
+    ),
+    briefcase: (
+        <>
+            <rect x="3" y="7" width="18" height="13" rx="2" />
+            <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            <path d="M3 13h18" />
+        </>
+    ),
+    graduation: (
+        <>
+            <path d="m2 9 10-5 10 5-10 5z" />
+            <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" />
+        </>
+    ),
     commit: (
         <>
             <circle cx="12" cy="12" r="3.2" />

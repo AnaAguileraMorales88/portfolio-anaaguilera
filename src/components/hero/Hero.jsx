@@ -22,14 +22,14 @@ const Hero = ({ state }) => {
             innerClassName="grid items-center gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-16"
         >
             <header className="order-2 lg:order-1">
-                <p className="eyebrow">Ana Aguilera · {hero.eyebrow}</p>
+                <p className="eyebrow">{hero.eyebrow}</p>
 
                 <h1
                     id="hero-title"
                     tabIndex={-1}
-                    className="mt-6 text-5xl font-bold uppercase leading-none tracking-tight text-brand sm:text-6xl lg:text-7xl"
+                    className="mt-6 text-4xl font-bold uppercase leading-none tracking-tight text-brand min-[400px]:text-5xl sm:text-6xl lg:text-7xl"
                 >
-                    {hero.greeting} {hero.name}
+                    {hero.name}
                 </h1>
 
                 <ul className="mt-6 flex flex-col gap-1.5 text-base font-medium text-ink-soft sm:text-lg md:flex-row md:items-center md:gap-x-4 md:whitespace-nowrap lg:text-base xl:text-lg">
@@ -70,18 +70,6 @@ const Hero = ({ state }) => {
                 </p>
 
                 <p className="mt-8 max-w-xl text-lg leading-relaxed text-ink-soft">{hero.description}</p>
-
-                <p className="mt-3 max-w-xl text-lg leading-relaxed text-ink-soft">
-                    {hero.links.map((part) =>
-                        typeof part === 'string' ? (
-                            part
-                        ) : (
-                            <a key={part.href} href={part.href} className="text-link">
-                                {part.text}
-                            </a>
-                        ),
-                    )}
-                </p>
 
                 <p className="mt-9 flex flex-col gap-3 sm:flex-row">
                     <a href="#projects" className="btn-primary">

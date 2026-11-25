@@ -2,8 +2,10 @@
  * Título editorial de cada sección: etiqueta pequeña + título en mayúsculas
  * (pre + mark: el título completo, p. ej. "Sobre" + "mí").
  */
-const SectionHeading = ({ id, eyebrow, pre, mark, children, align = 'center' }) => (
-    <header className={`mb-10 sm:mb-14 ${align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-xl'}`}>
+const SectionHeading = ({ id, eyebrow, pre, mark, children, align = 'center', className = '' }) => (
+    <header
+        className={`mb-10 sm:mb-14 ${align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-xl'} ${className}`}
+    >
         <p className="eyebrow mb-5">{eyebrow}</p>
         <h2
             id={id}

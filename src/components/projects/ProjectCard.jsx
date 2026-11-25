@@ -2,35 +2,27 @@ import Icon from '../ui/Icon';
 import { useLanguage } from '../../i18n/useLanguage';
 
 const VISIBLE_TAGS = 6;
-const COVERS = [
-    'linear-gradient(135deg, #4f46e5, #2b1b68)',
-    'linear-gradient(135deg, #6366f1, #3730a3)',
-    'linear-gradient(135deg, #a5b4fc, #4338ca)',
-];
 
-const ProjectCard = ({ title, description, tags, githubLink, liveLink, index }) => {
+const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => {
     const { t } = useLanguage();
     const visible = tags.slice(0, VISIBLE_TAGS);
     const hidden = tags.slice(VISIBLE_TAGS);
 
     return (
-        <article className="card group flex h-full flex-col overflow-hidden transition-transform duration-300 hover:-translate-y-1">
-            <header
-                className="relative flex h-32 items-end overflow-hidden p-6"
-                style={{ background: COVERS[index % COVERS.length] }}
-            >
+        <article className="card flex h-full flex-col p-6 sm:p-7">
+            <header className="flex items-center gap-3">
                 <span
-                    className="absolute -right-3 -top-6 text-[7rem] font-bold uppercase leading-none text-white/10 transition-transform duration-500 group-hover:scale-110"
+                    className="grid size-11 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent"
                     aria-hidden="true"
                 >
-                    {title.slice(0, 2)}
+                    <Icon name="folder" />
                 </span>
-                <h3 className="relative ml-auto text-2xl font-bold text-white">{title}</h3>
+                <h3 className="text-xl font-bold text-brand">{title}</h3>
             </header>
 
-            <p className="flex-1 px-6 pt-6 leading-relaxed text-ink-muted">{description}</p>
+            <p className="mt-4 flex-1 leading-relaxed text-ink-muted">{description}</p>
 
-            <ul className="flex flex-wrap gap-2 px-6 py-6" aria-label={`${t.projects.tech} ${title}`}>
+            <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${t.projects.tech} ${title}`}>
                 {visible.map((tag) => (
                     <li key={tag} className="chip">
                         {tag}
@@ -44,17 +36,7 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink, index }) 
                 )}
             </ul>
 
-            <footer className="flex gap-3 px-6 pb-6">
-                <a
-                    href={githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-secondary flex-1"
-                    aria-label={`${t.projects.code} ${title} (GitHub)`}
-                >
-                    <Icon name="github" className="size-4" />
-                    GitHub
-                </a>
+            <footer className="mt-6 flex gap-3">
                 {liveLink && (
                     <a
                         href={liveLink}
@@ -63,8 +45,20 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink, index }) 
                         className="btn-primary flex-1"
                         aria-label={`${t.projects.demo} ${title}`}
                     >
-                        Demo
-                        <Icon name="arrowUpRight" className="size-4" />
+                        <Icon name="globe" className="size-4" />
+                        {t.projects.web}
+                    </a>
+                )}
+                {githubLink && (
+                    <a
+                        href={githubLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-secondary flex-1"
+                        aria-label={`${t.projects.code} ${title} (GitHub)`}
+                    >
+                        <Icon name="github" className="size-4" />
+                        GitHub
                     </a>
                 )}
             </footer>

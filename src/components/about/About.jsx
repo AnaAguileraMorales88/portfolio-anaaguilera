@@ -9,9 +9,11 @@ const About = ({ state }) => {
 
     return (
         <Screen id="about" state={state} labelledBy="about-title">
-            <SectionHeading id="about-title" eyebrow={t.about.eyebrow} pre={t.about.pre} mark={t.about.mark} />
+            <SectionHeading id="about-title" eyebrow={t.about.eyebrow} pre={t.about.pre} mark={t.about.mark}>
+                {t.about.intro}
+            </SectionHeading>
 
-            <ol className="grid gap-5 md:grid-cols-3 lg:gap-6">
+            <ol className="grid gap-5 lg:grid-cols-3 lg:gap-6">
                 {aboutData[lang].map((card) => (
                     <li key={card.icon}>
                         <AboutCard {...card} />

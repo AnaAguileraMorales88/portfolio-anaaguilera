@@ -13,7 +13,7 @@ const Skills = ({ state }) => {
                 {t.skills.intro}
             </SectionHeading>
 
-            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 {skillsData[lang].map((category) => (
                     <li key={category.icon}>
                         <SkillCategory {...category} />

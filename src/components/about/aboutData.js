@@ -3,34 +3,48 @@ export const aboutData = {
         {
             icon: 'user',
             title: 'Quién soy',
-            description: 'Desarrolladora frontend con pasión por crear experiencias web accesibles y modernas. Creo en la belleza de la simplicidad y el código limpio.',
-        },
-        {
-            icon: 'heart',
-            title: 'Lo que me encanta',
-            description: 'Diseñar interfaces elegantes y funcionales con atención al detalle. Mi inspiración proviene de la combinación perfecta entre diseño y tecnología.',
+            description:
+                'Desarrolladora Fullstack impulsada por crear soluciones digitales que combinan utilidad, accesibilidad y una excelente experiencia de usuario (UX).',
         },
         {
             icon: 'target',
             title: 'Mi enfoque',
-            description: 'Desarrollo proyectos con paciencia y dedicación, priorizando la accesibilidad, el rendimiento y la experiencia del usuario.',
+            description:
+                'La arquitectura completa de las aplicaciones: desde un backend robusto y eficiente (bases de datos, APIs y lógica de negocio) hasta interfaces frontend intuitivas.',
+        },
+        {
+            icon: 'heart',
+            title: 'Lo que me motiva',
+            description: 'Traducir ideas en proyectos funcionales que respondan a necesidades reales.',
+            points: [
+                'Afrontar retos técnicos con enfoques creativos.',
+                'Impulsar la mejora continua en el desarrollo.',
+                'Aprender y explorar nuevas tecnologías.',
+            ],
         },
     ],
     en: [
         {
             icon: 'user',
             title: 'Who I am',
-            description: 'Frontend developer passionate about building accessible, modern web experiences. I believe in the beauty of simplicity and clean code.',
-        },
-        {
-            icon: 'heart',
-            title: 'What I love',
-            description: 'Designing elegant, functional interfaces with attention to detail. My inspiration comes from the perfect blend of design and technology.',
+            description:
+                'Fullstack developer driven by building digital solutions that combine usefulness, accessibility and an excellent user experience (UX).',
         },
         {
             icon: 'target',
             title: 'My approach',
-            description: 'I build projects with patience and dedication, prioritizing accessibility, performance and user experience.',
+            description:
+                'The full architecture of an application: from a robust, efficient backend (databases, APIs and business logic) to intuitive frontend interfaces.',
+        },
+        {
+            icon: 'heart',
+            title: 'What drives me',
+            description: 'Turning ideas into working projects that meet real needs.',
+            points: [
+                'Tackling technical challenges with creative approaches.',
+                'Driving continuous improvement in development.',
+                'Learning and exploring new technologies.',
+            ],
         },
     ],
 };
