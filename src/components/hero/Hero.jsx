@@ -1,18 +1,35 @@
 import DownloadCV from '../downloadCV/DownloadCV';
+import NeuralBackground from './NeuralBackground';
+import { useTypewriter } from '../../hooks/useTypewriter';
 import anaPhoto from '../../assets/Images/Ana.jpg';
 
+const ROLES = [
+    'Desarrolladora Frontend',
+    'Fullstack con React y Spring Boot',
+    'Diseño accesible y elegante',
+    'Código limpio y funcional',
+];
+
 const Hero = () => {
+    const typed = useTypewriter(ROLES);
+
     return (
         <section
             id="hero"
             aria-labelledby="hero-title"
-            className="relative flex min-h-svh items-center px-5 pb-16 pt-28 sm:px-8"
+            className="relative isolate flex min-h-svh overflow-hidden items-center px-5 pb-16 pt-28 sm:px-8"
         >
+            <NeuralBackground />
+
             <article className="mx-auto grid w-full max-w-6xl items-center gap-12 md:grid-cols-[1.2fr_1fr] md:gap-16">
                 <header className="order-2 space-y-7 text-center md:order-1 md:text-left">
-                    <p className="chip">
-                        <span className="mr-2 inline-block size-1.5 rounded-full bg-accent align-middle" aria-hidden="true"></span>
-                        Desarrolladora Frontend · Fullstack
+                    <p className="chip inline-flex min-h-8 items-center gap-2 font-mono text-[0.8rem]">
+                        <span className="size-1.5 animate-pulse rounded-full bg-accent" aria-hidden="true"></span>
+                        <span className="sr-only">{ROLES.join(', ')}</span>
+                        <span aria-hidden="true" className="text-fg/90">
+                            {typed}
+                            <span className="ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[2px] animate-pulse bg-accent"></span>
+                        </span>
                     </p>
 
                     <h1 id="hero-title" className="text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
