@@ -58,6 +58,7 @@ export const ui = {
             code: 'Ver código de',
             demo: 'Visitar la web de',
             web: 'Web',
+            figma: 'Ver el diseño en Figma de',
             more: 'más',
         },
         experience: {
@@ -132,6 +133,7 @@ export const ui = {
             code: 'View source code of',
             demo: 'Visit the website of',
             web: 'Website',
+            figma: 'View the Figma design of',
             more: 'more',
         },
         experience: {

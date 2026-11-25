@@ -137,6 +137,15 @@ const strokes = {
             <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" />
         </>
     ),
+    figma: (
+        <>
+            <path d="M9 3h3v6H9a3 3 0 0 1 0-6z" />
+            <path d="M12 3h3a3 3 0 0 1 0 6h-3z" />
+            <path d="M9 9h3v6H9a3 3 0 0 1 0-6z" />
+            <circle cx="15" cy="12" r="3" />
+            <path d="M9 15h3v3a3 3 0 1 1-3-3z" />
+        </>
+    ),
     commit: (
         <>
             <circle cx="12" cy="12" r="3.2" />

@@ -17,7 +17,7 @@ const ProjectLink = ({ href, label, icon, children }) => (
     </a>
 );
 
-const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => {
+const ProjectCard = ({ title, description, tags, liveLink, figmaLink, githubLink }) => {
     const { t } = useLanguage();
     const visible = tags.slice(0, VISIBLE_TAGS);
     const hidden = tags.slice(VISIBLE_TAGS);
@@ -57,6 +57,11 @@ const ProjectCard = ({ title, description, tags, githubLink, liveLink }) => {
                 {liveLink && (
                     <ProjectLink href={liveLink} icon="globe" label={`${t.projects.demo} ${title}`}>
                         {t.projects.web}
+                    </ProjectLink>
+                )}
+                {figmaLink && (
+                    <ProjectLink href={figmaLink} icon="figma" label={`${t.projects.figma} ${title}`}>
+                        Figma
                     </ProjectLink>
                 )}
                 {githubLink && (
