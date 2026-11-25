@@ -50,7 +50,7 @@ function App() {
           return <ScreenComponent key={id} state={stateOf(id)} />
         })}
       </main>
-      <Footer />
+      <Footer visible={active === 'contact' && !leaving} />
     </>
   )
 }

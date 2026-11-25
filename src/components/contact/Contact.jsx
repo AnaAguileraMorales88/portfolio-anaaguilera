@@ -13,13 +13,17 @@ const Contact = ({ state }) => {
             id="contact"
             state={state}
             labelledBy="contact-title"
-            innerClassName="card max-w-4xl px-6 py-14 sm:px-14 sm:py-20"
+            innerClassName="card reveal max-w-3xl px-6 py-10 sm:px-12 sm:py-16"
         >
             <SectionHeading id="contact-title" eyebrow={t.contact.eyebrow} mark={t.contact.mark}>
                 {t.contact.intro}
             </SectionHeading>
 
-            <ul className="flex flex-col flex-wrap justify-center gap-3 sm:flex-row" aria-label={t.contact.linksLabel}>
+            <ul
+                className="reveal flex flex-col flex-wrap justify-center gap-3 sm:flex-row"
+                style={{ '--i': 3 }}
+                aria-label={t.contact.linksLabel}
+            >
                 {contactData.map((contact, index) => (
                     <li key={contact.name}>
                         <a

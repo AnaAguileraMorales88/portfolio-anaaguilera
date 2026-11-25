@@ -16,27 +16,27 @@ const ExperienceItem = ({
 }) => (
     <li>
         <details name={`experiencia-${group}`} open={defaultOpen} className="card group overflow-hidden">
-            <summary className="flex cursor-pointer list-none items-center gap-4 p-5 [&::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center gap-4 p-4 transition-colors hover:bg-accent-soft/40 sm:px-5 [&::-webkit-details-marker]:hidden">
                 {!compact && (
-                    <span className="hidden w-28 shrink-0 font-mono text-sm font-bold text-accent sm:block">
+                    <span className="hidden w-24 shrink-0 font-mono text-sm font-bold text-accent sm:block">
                         {period}
                     </span>
                 )}
-                <hgroup className="flex-1">
-                    <h4 className="font-bold text-brand sm:text-lg">{role}</h4>
+                <hgroup className="min-w-0 flex-1">
+                    <h3 className="font-bold leading-snug text-brand">{role}</h3>
                     <p className="mt-0.5 text-sm text-ink-muted">
                         {company}
                         <span className={`font-mono text-accent ${compact ? '' : 'sm:hidden'}`}> · {period}</span>
                     </p>
                 </hgroup>
-                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-open:rotate-180">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-accent-soft text-accent transition-transform duration-300 group-open:rotate-180">
                     <Icon name="chevron" className="size-4" />
                 </span>
             </summary>
 
             <ul
-                className={`space-y-2.5 border-t border-accent-line/60 px-5 pb-5 pt-4 text-ink-muted ${
-                    compact ? '' : 'sm:pl-[9.5rem] sm:pr-8'
+                className={`details-body space-y-2 border-t border-accent-line/50 px-4 pb-4 pt-3 text-sm text-ink-muted sm:px-5 ${
+                    compact ? '' : 'sm:pl-[8.25rem] sm:pr-6'
                 }`}
             >
                 {description.map((item) => {
@@ -45,7 +45,7 @@ const ExperienceItem = ({
                     return (
                         <li
                             key={text}
-                            className="relative pl-5 leading-relaxed before:absolute before:left-0 before:top-[0.65em] before:size-1.5 before:rounded-full before:bg-accent-bright"
+                            className="relative pl-4 leading-relaxed before:absolute before:left-0 before:top-[0.6em] before:size-1.5 before:rounded-full before:bg-accent-bright"
                         >
                             {text}
                             {link && (

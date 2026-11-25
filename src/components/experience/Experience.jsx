@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import Screen from '../ui/Screen';
 import SectionHeading from '../ui/SectionHeading';
 import Icon from '../ui/Icon';
@@ -6,68 +7,95 @@ import EducationItem from './EducationItem';
 import { experienceData } from './experienceData';
 import { useLanguage } from '../../i18n/useLanguage';
 
-const GroupTitle = ({ icon, children }) => (
-    <h3 className="mb-4 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.15em] text-accent">
-        <Icon name={icon} className="size-4" />
-        {children}
-    </h3>
-);
+const TABS = [
+    { id: 'highlighted', icon: 'sparkles' },
+    { id: 'work', icon: 'briefcase' },
+    { id: 'education', icon: 'graduation' },
+];
 
+/** Experiencia en pestañas: a destacar, profesional y formación. Se ve un bloque cada vez. */
 const Experience = ({ state }) => {
     const { lang, t } = useLanguage();
-    const { highlighted, work, education } = experienceData[lang];
+    const data = experienceData[lang];
+    const [active, setActive] = useState(TABS[0].id);
+    // En escritorio la primera experiencia se muestra abierta; en móvil empiezan cerradas para que quepa en pantalla
+    const [isDesktop] = useState(() => window.matchMedia('(min-width: 1024px)').matches);
+    const tabRefs = useRef({});
+
+    // Flechas izquierda/derecha para moverse entre pestañas con el teclado
+    const onKeyDown = (e, index) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const next = TABS[(index + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length].id;
+        setActive(next);
+        tabRefs.current[next]?.focus();
+    };
 
     return (
-        <Screen
-            id="experience"
-            state={state}
-            labelledBy="experience-title"
-            innerClassName="grid gap-x-8 gap-y-10 lg:grid-cols-2"
-        >
-            <SectionHeading
-                id="experience-title"
-                eyebrow={t.experience.eyebrow}
-                mark={t.experience.mark}
-                className="mb-0! sm:mb-0! lg:col-span-2"
-            />
+        <Screen id="experience" state={state} labelledBy="experience-title" innerClassName="max-w-4xl">
+            <SectionHeading id="experience-title" eyebrow={t.experience.eyebrow} mark={t.experience.mark} />
 
-            <section aria-labelledby="exp-destacada" className="lg:col-span-2">
-                <GroupTitle icon="sparkles">
-                    <span id="exp-destacada">{t.experience.highlighted}</span>
-                </GroupTitle>
-                <ol className="space-y-3">
-                    {highlighted.map((exp, index) => (
-                        <ExperienceItem
-                            key={exp.role}
-                            {...exp}
-                            group="destacada"
-                            defaultOpen={index === 0}
-                            repoLabel={t.experience.repo}
-                        />
-                    ))}
-                </ol>
-            </section>
+            <menu
+                role="tablist"
+                aria-label={t.experience.mark}
+                className="reveal mx-auto mb-5 flex w-fit max-w-full gap-1 overflow-x-auto rounded-full border border-accent-line/60 bg-surface p-1 lg:mb-6"
+                style={{ '--i': 2 }}
+            >
+                {TABS.map(({ id, icon }, index) => {
+                    const selected = active === id;
+                    return (
+                        <li key={id} role="presentation">
+                            <button
+                                ref={(el) => (tabRefs.current[id] = el)}
+                                type="button"
+                                role="tab"
+                                id={`tab-${id}`}
+                                aria-selected={selected}
+                                aria-controls={`panel-${id}`}
+                                tabIndex={selected ? 0 : -1}
+                                onClick={() => setActive(id)}
+                                onKeyDown={(e) => onKeyDown(e, index)}
+                                className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-2 text-xs font-bold transition-colors duration-300 sm:px-4 sm:text-sm ${
+                                    selected
+                                        ? 'bg-accent-bright text-white'
+                                        : 'text-ink-muted hover:bg-accent-soft hover:text-accent'
+                                }`}
+                            >
+                                <Icon name={icon} className="hidden size-4 sm:block" />
+                                {t.experience[id]}
+                            </button>
+                        </li>
+                    );
+                })}
+            </menu>
 
-            <section aria-labelledby="exp-profesional">
-                <GroupTitle icon="briefcase">
-                    <span id="exp-profesional">{t.experience.work}</span>
-                </GroupTitle>
-                <ol className="space-y-3">
-                    {work.map((exp) => (
-                        <ExperienceItem key={exp.company} {...exp} group="profesional" compact />
-                    ))}
-                </ol>
-            </section>
-
-            <section aria-labelledby="exp-formacion">
-                <GroupTitle icon="graduation">
-                    <span id="exp-formacion">{t.experience.education}</span>
-                </GroupTitle>
-                <ul className="space-y-3">
-                    {education.map((item) => (
-                        <EducationItem key={item.title} {...item} />
-                    ))}
-                </ul>
+            <section
+                key={active}
+                role="tabpanel"
+                id={`panel-${active}`}
+                aria-labelledby={`tab-${active}`}
+                className="reveal"
+                style={{ '--i': 0 }}
+            >
+                {active === 'education' ? (
+                    <ul className="grid gap-3 md:grid-cols-2">
+                        {data.education.map((item) => (
+                            <EducationItem key={item.title} {...item} />
+                        ))}
+                    </ul>
+                ) : (
+                    <ol className={`grid gap-3 ${active === 'work' ? 'md:grid-cols-2' : ''}`}>
+                        {data[active].map((exp, index) => (
+                            <ExperienceItem
+                                key={exp.role}
+                                {...exp}
+                                group={active}
+                                defaultOpen={isDesktop && active === 'highlighted' && index === 0}
+                                compact={active === 'work'}
+                                repoLabel={t.experience.repo}
+                            />
+                        ))}
+                    </ol>
+                )}
             </section>
         </Screen>
     );

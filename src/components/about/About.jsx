@@ -13,13 +13,13 @@ const About = ({ state }) => {
                 {t.about.intro}
             </SectionHeading>
 
-            <ol className="grid gap-5 lg:grid-cols-3 lg:gap-6">
-                {aboutData[lang].map((card) => (
-                    <li key={card.icon}>
+            <ul className="carousel lg:mx-0 lg:grid lg:snap-none lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 lg:pb-0">
+                {aboutData[lang].map((card, i) => (
+                    <li key={card.icon} className="reveal lg:w-auto lg:max-w-none" style={{ '--i': i + 3 }}>
                         <AboutCard {...card} />
                     </li>
                 ))}
-            </ol>
+            </ul>
         </Screen>
     );
 };

@@ -11,9 +11,9 @@ const Projects = ({ state }) => {
         <Screen id="projects" state={state} labelledBy="projects-title">
             <SectionHeading id="projects-title" eyebrow={t.projects.eyebrow} mark={t.projects.mark} />
 
-            <ul className="grid gap-6 md:grid-cols-2">
-                {projectsData[lang].map((project) => (
-                    <li key={project.title}>
+            <ul className="carousel md:mx-0 md:grid md:snap-none md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0 lg:grid-cols-4">
+                {projectsData[lang].map((project, i) => (
+                    <li key={project.title} className="reveal md:w-auto md:max-w-none" style={{ '--i': i + 2 }}>
                         <ProjectCard {...project} />
                     </li>
                 ))}

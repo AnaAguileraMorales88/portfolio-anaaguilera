@@ -63,8 +63,8 @@ export const ui = {
         experience: {
             eyebrow: 'Trayectoria',
             mark: 'Experiencia',
-            highlighted: 'Experiencia a destacar',
-            work: 'Experiencia profesional',
+            highlighted: 'A destacar',
+            work: 'Profesional',
             education: 'Formación',
             repo: 'Repositorio en GitHub',
         },
@@ -137,8 +137,8 @@ export const ui = {
         experience: {
             eyebrow: 'Journey',
             mark: 'Experience',
-            highlighted: 'Featured experience',
-            work: 'Professional experience',
+            highlighted: 'Featured',
+            work: 'Professional',
             education: 'Education',
             repo: 'GitHub repository',
         },

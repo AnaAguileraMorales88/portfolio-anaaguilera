@@ -54,7 +54,7 @@
 /* ───────────── Componentes ───────────── */
 @layer components {
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-mono text-sm font-bold uppercase tracking-[0.2em] text-accent;
+    @apply inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm;
   }
 
   .eyebrow::before {
@@ -63,17 +63,69 @@
     box-shadow: 0 0 0 4px var(--color-accent-tint);
   }
 
+  /* Tarjeta limpia: borde fino y sombra mínima */
   .card {
-    @apply rounded-3xl border border-accent-line/70 bg-surface/80 backdrop-blur-sm;
-    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 12px 32px -16px rgb(67 56 202 / 0.18);
+    @apply rounded-2xl border border-accent-line/60 bg-surface;
+    box-shadow: 0 1px 2px rgb(15 23 42 / 0.04);
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.35s ease,
+      border-color 0.35s ease;
+  }
+
+  /* Elevación suave al pasar el ratón */
+  .card-hover:hover {
+    @apply border-accent-line;
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -18px rgb(67 56 202 / 0.35);
+  }
+
+  .card-hover .card-icon {
+    transition: background-color 0.35s ease, color 0.35s ease;
+  }
+
+  .card-hover:hover .card-icon {
+    @apply bg-accent-bright text-white;
   }
 
   .chip {
-    @apply inline-block rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent-strong;
+    @apply inline-block rounded-full border border-accent-line/70 px-2.5 py-0.5 text-xs font-medium text-ink-soft;
+  }
+
+  /* Carrusel horizontal en móvil: se desliza con el dedo y encaja en cada tarjeta */
+  .carousel {
+    @apply -mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-5 px-5 pb-2 sm:-mx-8 sm:scroll-px-8 sm:px-8;
+    scrollbar-width: none;
+  }
+
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel > li {
+    @apply w-[82%] max-w-sm shrink-0 snap-start;
+  }
+
+  /* Entrada en cascada al mostrarse cada pantalla (--i = orden) */
+  .reveal {
+    animation: reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 80ms);
+  }
+
+  details[open] > .details-body {
+    animation: reveal 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .arrow-nudge svg {
+    transition: transform 0.3s ease;
+  }
+
+  .arrow-nudge:hover svg {
+    transform: translateX(3px);
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent-bright px-7 py-3.5 text-sm font-bold text-white transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent-bright px-6 py-3 text-sm font-bold text-white transition-all duration-300;
     box-shadow: 0 10px 24px -10px rgb(79 70 229 / 0.7);
   }
 
@@ -83,7 +135,7 @@
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-accent-line bg-surface px-7 py-3.5 text-sm font-bold text-brand transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-accent-line bg-surface px-6 py-3 text-sm font-bold text-brand transition-all duration-300;
   }
 
   .btn-secondary:hover {
@@ -93,7 +145,7 @@
 
   /* Transición entre pantallas */
   .screen-in {
-    animation: screen-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: screen-in 0.4s ease-out both;
   }
 
   .screen-out {
@@ -104,8 +156,13 @@
 @keyframes screen-in {
   from {
     opacity: 0;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
     transform: translateY(14px);
-    filter: blur(8px);
   }
 }
 
